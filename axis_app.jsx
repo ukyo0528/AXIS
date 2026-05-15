@@ -151,10 +151,10 @@ const css = `
     text-align:left; display:flex; flex-direction:column; }
   .lib-type-btn:hover { border-color:#888; background:#f9f9f9; }
   .lib-type-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; padding:20px 0 16px; border-bottom:1px solid #f0f0f0; }
-  .lib-entry-btn { position:fixed; top:24px; right:24px; border:1px solid #555; background:#222;
-    color:#f0f0f0; padding:13px 22px; font-family:'Noto Serif JP',serif; font-size:11px; letter-spacing:0.2em;
+  .lib-entry-btn { position:fixed; top:22px; right:22px; border:1px solid #333; background:#222;
+    color:#f0f0f0; padding:12px 20px; font-family:'Noto Serif JP',serif; font-size:11px; letter-spacing:0.18em;
     cursor:pointer; transition:all 0.2s; z-index:150; }
-  .lib-entry-btn:hover { background:#444; border-color:#333; }
+  .lib-entry-btn:hover { background:#444; border-color:#555; }
   /* ── DeepDive screens ── */
   .dd-screen {
     min-height: 100vh; display: flex; flex-direction: column;
@@ -232,13 +232,13 @@ const css = `
 
   /* returning user floating btn */
   .s1-dd-btn {
-    position: fixed; bottom: 32px; right: 28px;
-    border: 1px solid #e0e0e0; background: #fff; color: #555;
+    position: fixed; top: 82px; right: 22px;
+    border: 1px solid #333; background: #222; color: #f0f0f0;
     padding: 12px 20px; font-family: 'Noto Serif JP', serif;
-    font-size: 10px; letter-spacing: 0.18em; cursor: pointer; transition: all 0.2s;
-    z-index: 50;
+    font-size: 11px; letter-spacing: 0.18em;
+    cursor: pointer; transition: all 0.2s; z-index: 200;
   }
-  .s1-dd-btn:hover { border-color: #888; color: #222; }
+  .s1-dd-btn:hover { background: #444; border-color: #555; }
 
   /* deepdive entry button on card screens */
   .dd-entry-btn {
@@ -1110,7 +1110,7 @@ const ALL_PERSONS = [
   {name:"レイ・ダリオ",       cat:"経営者", type:"INTJ",typeLabel:"INTJ建築家", years:"1949 —"},
   {name:"ピーター・ティール", cat:"経営者", type:"INTJ",typeLabel:"INTJ建築家", years:"1967 —"},
   {name:"本田宗一郎",         cat:"経営者", type:"ISTP",typeLabel:"ISTP巨匠",  years:"1906 — 1991"},
-  {name:"スティーブ・ウォズニアック", cat:"経営者", type:"ENFP",typeLabel:"ENFP運動家", years:"1950 —"},
+  {name:"マーク・トウェイン",         cat:"文豪",   type:"ENFP", typeLabel:"ENFP運動家", years:"1835 — 1910"},
   {name:"前澤友作",           cat:"経営者", type:"ESTP",typeLabel:"ESTP起業家", years:"1975 —"},
   {name:"リチャード・ブランソン", cat:"経営者", type:"ESTP",typeLabel:"ESTP起業家", years:"1950 —"},
   // ── 文豪 ───────────────────────────────────────
@@ -1318,21 +1318,22 @@ const PERSON_INFO = {
   "ダーウィン":{"desc":"イギリスの博物学者（1809-1882）。ビーグル号での5年間の航海の観察をもとに進化論を確立。1859年の「種の起源」で自然選択説を提唱し生物学に革命をもたらした。当初は宗教界から強い反発を受けたが現代生物学の根幹をなす理論となっている。"},
   "ヴォルテール":{"desc":"フランスの啓蒙思想家・文学者（1694-1778）。「カンディード」が代表作。宗教的不寛容と専制政治を批判した鋭い風刺で知られる。フランス革命の精神的土台を作った啓蒙主義の代表的知識人。バスティーユに投獄されるなど当局に睨まれ続けた。"},
   "マキャヴェッリ":{"desc":"イタリアの政治思想家（1469-1527）。著書「君主論」で目的のためには手段を選ばない政治哲学を論じた。フィレンツェ共和国の外交官として活躍したが失脚後に著述業に専念した。「マキャヴェリズム」は今日でも権謀術数的な政治手法を指す言葉として使われる。"},
-  "ガンディー":{"desc":"インドの指導者（1869-1948）。弁護士資格を持ちながら非暴力・不服従でインド独立運動を指導し1947年独立を実現した。「マハトマ」の称号で知られる。キング牧師やネルソン・マンデラら世界中の指導者に影響を与えた。独立後まもなく暗殺された。"},
+
 };
 
 /* ── Person Modal ── */
 function PersonModal({ person, onClose }) {
   const info = PERSON_INFO[person.name];
   return (
-    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.45)",zIndex:1000,
-      display:"flex",alignItems:"center",justifyContent:"center",padding:"0 20px"}}
+    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.5)",zIndex:1000,
+      display:"flex",alignItems:"center",justifyContent:"center",padding:"20px"}}
       onClick={onClose}>
-      <div style={{background:"#fff",padding:"36px 28px",maxWidth:400,width:"100%",
+      <div style={{background:"#fff",padding:"32px 24px",maxWidth:400,width:"100%",
+        maxHeight:"82vh",overflowY:"auto",
         position:"relative",opacity:0,animation:"fadeIn 0.3s ease forwards"}}
         onClick={e=>e.stopPropagation()}>
         <button onClick={onClose} style={{position:"absolute",top:16,right:16,background:"none",
-          border:"none",font:"20px/1 serif",color:"#aaa",cursor:"pointer",padding:"4px 8px"}}>×</button>
+          border:"1px solid #e0e0e0",fontSize:14,color:"#888",cursor:"pointer",padding:"6px 10px",letterSpacing:0}}>×</button>
         <p style={{fontSize:9,letterSpacing:"0.3em",color:"#999",textTransform:"uppercase",marginBottom:12}}>
           {person.cat} ·  {person.typeLabel}
         </p>
@@ -1355,7 +1356,7 @@ function TypeDetailModal({ typeEntry, onSelectPerson, onClose }) {
     <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.45)",zIndex:900,
       display:"flex",alignItems:"flex-end",justifyContent:"center"}}
       onClick={onClose}>
-      <div style={{background:"#fff",width:"100%",maxWidth:480,maxHeight:"70vh",
+      <div style={{background:"#fff",width:"100%",maxWidth:480,maxHeight:"75vh",
         overflowY:"auto",padding:"28px 24px 40px",
         opacity:0,animation:"fadeIn 0.3s ease forwards"}}
         onClick={e=>e.stopPropagation()}>
